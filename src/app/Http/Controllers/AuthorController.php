@@ -2,41 +2,79 @@
 
 namespace App\Http\Controllers;
 
-// Eloquentを使用できるようにAuthorモデルを読み込む
-use App\Models\Author; # 1-13:Authorモデルを使用するためにインポート
 use Illuminate\Http\Request;
+use App\Models\Author;
+// フォームリクエストの読み込み
+use App\Http\Requests\AuthorRequest;
 
 class AuthorController extends Controller
 {
+    // データ一覧ページの表示
+    public function index()
+    {
+        $authors = Author::all();
+        return view('index', ['authors' => $authors]);
+   }
 
-    // 1-15:データ追加用ページの表示（addアクション）
+   // データ追加用ページの表示
     public function add()
     {
         return view('add');
     }
 
-    // 1-15:リクエストボディを受け取る（createアクション）
-    public function create(Request $request){
+    // 追加機能
+    public function create(AuthorRequest $request)
+    {
         $form = $request->all();
-        Author::create($form); // データベースに新しいレコードを追加（保存）
+        Author::create($form);
         return redirect('/');
     }
 
-    // 上記において「データ追加用ページ」のinputタグのname属性がテーブルのカラム名と一致していない場合：
-        //$form = [
-    //     'name' => $request->name,
-    //     'age' => $request->age,
-    //     'nationality' => $request->country,
-    // ];
-    // Author::create($form);
+    // データ編集ページの表示
+    public function edit(Request $request){
+        $author = Author::find($request->id);
+        return view('edit', ['form' => $author]);
+    }
 
-
-    // 1-14:ページ表示（indexアクション）
-    public function index()
+    // 更新機能
+    // updateの引数を**RequestからAuthorRequest**に変更しフォームリクエストのAuthorRequestを適用
+    public function update(AuthorRequest $request)
     {
-        $authors = Author::all();
-        return view('index', ['authors' => $authors]);
+        $form = $request->all();
+        unset($form['_token']);
+        Author::find($request->id)->update($form);
+        return redirect('/');
+    }
+
+    // データ削除用ページの表示
+    public function delete(Request $request)
+    {
+        $author = Author::find($request->id);
+        return view('delete', ['author' => $author]);
+    }
+
+    // 削除機能
+    public function remove(Request $request)
+    {
+        Author::find($request->id)->delete();
+        return redirect('/');
     }
 
 
+    // 2-4:
+    public function verror()
+    {
+    return view('verror');
+    }
+
+    // 2-5
+    public function relate()
+    {
+        $hasItems = Author::has('book')->get();
+        $noItems = Author::doesntHave('book')->get();
+        $param = ['hasItems' => $hasItems, 'noItems' => $noItems];
+        return view('author.index',$param);
+    }
+
 }
+
