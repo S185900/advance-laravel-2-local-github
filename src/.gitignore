@@ -13,3 +13,5 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+
+# ここに書かれたものがギット管理から外れるということです。

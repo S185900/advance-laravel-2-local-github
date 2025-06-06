@@ -7,14 +7,18 @@ use App\Models\Author;
 // フォームリクエストの読み込み
 use App\Http\Requests\AuthorRequest;
 
+
 class AuthorController extends Controller
 {
     // データ一覧ページの表示
     public function index()
     {
-        $authors = Author::all();
+        // $authors = Author::all();
+        // $authors = Author::simplePaginate(4); // 3-4:ぺージネーション
+        $authors = Author::Paginate(4);
+        // $authors = Author::paginate(4);
         return view('index', ['authors' => $authors]);
-   }
+    }
 
    // データ追加用ページの表示
     public function add()
