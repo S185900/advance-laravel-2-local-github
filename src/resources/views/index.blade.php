@@ -18,8 +18,8 @@
     text-align: center;
   }
 
+  /* 3-4:paginateメソッドの矢印の大きさ調整のために追加 */
   svg.w-5.h-5 {
-    /*3-4:paginateメソッドの矢印の大きさ調整のために追加*/
     width: 30px;
     height: 30px;
   }
@@ -36,6 +36,7 @@
   @foreach ($authors as $author)
   <tr>
     <td>
+      <!-- 2-2:表示の仕方を変更 -->
       {{$author->getDetail()}}
     </td>
   </tr>

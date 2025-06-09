@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Author extends Model
 {
     use HasFactory;
@@ -20,12 +21,12 @@ class Author extends Model
         return $txt;
     }
 
+
     // 2-5
     public function book(){
         return $this->hasOne('App\Models\Book');
     }
 
-    // 2-5
     public function books(){
         return $this->hasMany('App\Models\Book');
     }
@@ -33,6 +34,7 @@ class Author extends Model
     // 2-6
     public function reviews()
     {
+        // return $this->belongsToMany(Book::class);
         return $this->belongsToMany(Review::class)->withPivot('review');
     }
 

@@ -17,4 +17,3 @@
   <button>送信</button>
 </form>
 @endsection
-

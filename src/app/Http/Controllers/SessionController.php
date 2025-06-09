@@ -11,6 +11,7 @@ class SessionController extends Controller
     $data = $request->session()->get('txt');
     return view('/session', ['data' => $data]);
   }
+  
   public function postSes(Request $request)
   {
     $txt = $request->input;

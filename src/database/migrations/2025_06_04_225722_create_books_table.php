@@ -15,6 +15,7 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            //2-5:Authorテーブルとのリレーションを設定
             $table->integer('author_id');
             $table->string('title');
             $table->timestamp('created_at')->useCurrent()->nullable();

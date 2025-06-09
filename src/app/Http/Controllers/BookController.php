@@ -9,7 +9,8 @@ class BookController extends Controller
 {
     public function index(){
         // $items = Book::all();
-        $items = Book::with('author')->get(); // 2-6
+        //2-6:N+1問題の解消：withメソッドを使って、BookモデルとAuthorモデルのリレーションを取得
+        $items = Book::with('author')->get();
         return view('book.index', ['items'=>$items]);
     }
     public function add(){

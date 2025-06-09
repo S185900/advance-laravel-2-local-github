@@ -7,6 +7,10 @@ use Illuminate\Database\Seeder;
 # 1-12:DBファサードを使用して、データベース操作を行うために必要なクラスをインポートします。
 use Illuminate\Support\Facades\DB;
 
+# 3-7:Authorモデルを利用して Eloquent からファクトリを呼び出し
+use App\Models\Author;
+
+
 class AuthorsTableSeeder extends Seeder
 {
     /**
@@ -19,29 +23,6 @@ class AuthorsTableSeeder extends Seeder
     # 1-12:runメソッドに、authorsテーブルのシードを作成する処理を用意する。
     public function run()
     {
-        $param = [
-            'name' => 'tony',
-            'age' => 35,
-            'nationality' => 'American'
-            ];
-        DB::table('authors')->insert($param); # 1-12:authorsテーブルに$paramのデータを挿入するという命令
-        $param = [
-            'name' => 'jack',
-            'age' => 20,
-            'nationality' => 'British'
-            ];
-        DB::table('authors')->insert($param); # 1-12:authorsテーブルに$paramのデータを挿入するという命令
-        $param = [
-            'name' => 'sara',
-            'age' => 45,
-            'nationality' => 'Egyptian'
-            ];
-        DB::table('authors')->insert($param); # 1-12:authorsテーブルに$paramのデータを挿入するという命令
-        $param = [
-            'name' => 'saly',
-            'age' => 31,
-            'nationality' => 'Chinese'
-            ];
-        DB::table('authors')->insert($param); # 1-12:authorsテーブルに$paramのデータを挿入するという命令
+        Author::factory()->count(3)->create();
     }
 }

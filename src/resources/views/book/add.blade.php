@@ -32,8 +32,8 @@ button {
 </ul>
 @endif
 <form action="/book/add" method="post">
+@csrf
   <table>
-    @csrf
     <tr>
       <th>author_id:</th>
       <td><input type="id" name="author_id"></td>

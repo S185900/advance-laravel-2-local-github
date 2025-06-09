@@ -30,4 +30,3 @@ td {
   @endforeach
 </table>
 @endsection
-

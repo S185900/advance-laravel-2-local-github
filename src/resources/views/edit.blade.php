@@ -27,8 +27,9 @@
 <p>入力に誤りがあります</p>
 @endif
 <form action="/edit" method="POST">
+@csrf
   <table>
-    @csrf
+
     @error('id')
     <tr>
         <th style="background-color: red">ERROR</th>
