@@ -6,6 +6,8 @@ use App\Http\Controllers\BookController; //2-5
 use App\Http\Controllers\SessionController;// 3-3
 use App\Models\Person; //3-8
 use App\Models\Product; //3-9
+use App\Http\Controllers\PenController; //3-10
+
 
 Route::get('/', [AuthorController::class, 'index']);
 Route::get('/add', [AuthorController::class, 'add']);
@@ -67,3 +69,8 @@ Route::get('uuid',function() {
             echo $product.'<br>';
         }
 });
+
+//3-10:ルーティング
+Route::get('fill', [PenController::class,'fillPen']);
+Route::get('create', [PenController::class,'createPen']);
+Route::get('insert', [PenController::class,'insertPen']);
